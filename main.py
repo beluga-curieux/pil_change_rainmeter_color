@@ -3,7 +3,7 @@ import time
 import PIL.Image
 
 
-def get_luminosite(c: tuple) -> int:
+def get_brightness(c: tuple) -> int:
     s = 0
     for i in c[:3]:
         s += i
@@ -18,7 +18,6 @@ def main():
 
     w, h = result.size
 
-    target_color = 0, 0, 0
     new_color = 29, 40, 50
 
     for x in range(w):
@@ -26,7 +25,7 @@ def main():
 
             value = img.getpixel((x, y))
 
-            if value[3] > 100 and get_luminosite(value) < 50:
+            if value[3] > 100 and get_brightness(value) < 50:
 
                 result.putpixel((x, y), (*new_color, value[3]))
 

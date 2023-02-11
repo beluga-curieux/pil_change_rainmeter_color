@@ -1,4 +1,14 @@
+import time
+
 import PIL.Image
+
+
+def get_luminosite(c: tuple) -> int:
+    s = 0
+    for i in c[:3]:
+        s += i
+
+    return int(s/3)
 
 
 def main():
@@ -16,10 +26,13 @@ def main():
 
             value = img.getpixel((x, y))
 
-            if value[:3] == target_color and value[3] > 100:
+            if value[3] > 100 and get_luminosite(value) < 50:
+
                 result.putpixel((x, y), (*new_color, value[3]))
 
     result.show()
+
+    result.save("result.png")
 
 
 if __name__ == '__main__':
